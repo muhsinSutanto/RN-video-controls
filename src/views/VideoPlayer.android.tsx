@@ -24,6 +24,7 @@ interface State {
   currentTime: number;
   duration: number;
   showControls: boolean;
+  test: number;
 }
 
 export const VideoPlayer: React.FC = () => {
@@ -51,8 +52,7 @@ export const VideoPlayer: React.FC = () => {
           <Video
             ref={videoRef}
             source={{
-              uri:
-                'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+              uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
             }}
             style={state.fullscreen ? styles.fullscreenVideo : styles.video}
             controls={false}
@@ -106,8 +106,8 @@ export const VideoPlayer: React.FC = () => {
 
   function handleOrientation(orientation: string) {
     orientation === 'LANDSCAPE-LEFT' || orientation === 'LANDSCAPE-RIGHT'
-      ? (setState(s => ({...s, fullscreen: true})), StatusBar.setHidden(true))
-      : (setState(s => ({...s, fullscreen: false})),
+      ? (setState((s) => ({...s, fullscreen: true})), StatusBar.setHidden(true))
+      : (setState((s) => ({...s, fullscreen: false})),
         StatusBar.setHidden(false));
   }
 
@@ -125,7 +125,7 @@ export const VideoPlayer: React.FC = () => {
     }
 
     setState({...state, play: true});
-    setTimeout(() => setState(s => ({...s, showControls: false})), 2000);
+    setTimeout(() => setState((s) => ({...s, showControls: false})), 2000);
   }
 
   function skipBackward() {
@@ -144,7 +144,7 @@ export const VideoPlayer: React.FC = () => {
   }
 
   function onLoadEnd(data: OnLoadData) {
-    setState(s => ({
+    setState((s) => ({
       ...s,
       duration: data.duration,
       currentTime: data.currentTime,
@@ -152,7 +152,7 @@ export const VideoPlayer: React.FC = () => {
   }
 
   function onProgress(data: OnProgressData) {
-    setState(s => ({
+    setState((s) => ({
       ...s,
       currentTime: data.currentTime,
     }));
